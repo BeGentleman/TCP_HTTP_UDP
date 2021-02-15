@@ -1,0 +1,12 @@
+0x00 什么是http协议
+     # TODO 
+      
+0x01 http协议的基本用法
+     http主要由两部分组成：header和body
+     header中有7种基本请求，其中post和get用于大部分web方面，其中post，get，del，put用于api方面，header中一般存放指示。
+     body中一般存放内容。
+     # TODO
+     path
+     queryset
+     
+     
