@@ -13,7 +13,7 @@
 0x02 在django中的实现
 
 
-0x03 纯python实现一个静态的web服务器端
+0x03 纯python实现一个静态的web服务器端（返回固定界面）
      代码：
           import socket
 
