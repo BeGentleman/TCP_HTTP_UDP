@@ -10,3 +10,48 @@
      queryset
      
      
+0x02 在django中的实现
+
+
+0x03 纯python实现一个静态的web服务器端
+     代码：
+          import socket
+
+          if __name__ == '__main__':
+              # 1.开发一个TCP服务器端
+              # 创建socket对象
+              TCP_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+              TCP_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
+              # 绑定
+              TCP_server_socket.bind(("", 8055))
+              # 监听
+              TCP_server_socket.listen(128)
+
+              while True:
+                  # 2.获取浏览器发送过来的HTTP请求报文
+                  # 建立连接
+                  client_socket, client_addr = TCP_server_socket.accept()
+                  # 获取浏览器的请求信息
+                  client_request_data = client_socket.recv(1024).decode(encoding="utf-8")#不写的话默认utf-8
+                  print(client_request_data)
+
+                  # 3.生成返回给浏览器的响应报文
+                  with open("./practice/templates/1.html", 'rb') as f:
+                      file_data = f.read()
+
+                  # 应答行
+                  response_line = "HTTP/1.1 200 NOT OK\r\n"
+                  # 应答头
+                  response_header = "Server:hahahahahahah\r\n"
+                  # 空行
+                  response_blank_line = "\r\n"
+                  # 应答体
+                  response_body = file_data
+
+                  response_data = (response_line + response_header + response_blank_line).encode() + response_body
+
+                  client_socket.send(response_data)
+
+                  # 4.关闭socket套接字
+                  client_socket.close()
+
